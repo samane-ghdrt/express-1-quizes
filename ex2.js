@@ -156,6 +156,35 @@ const storeData = [
 // answer
 const express=require('express');
 const app =express();
-app.listen('',()=>{
-  
+const port=4000;
+app.get('/:category/:subcategory/:id',(req,res)=>{
+  const id= Number(req.params.id);
+  const{category,subcategory}=req.body;
+  const categor=storeData.find(i=>i.category===category);
+  if(categor){
+    const subcategoriy=categor.subcategories.find(i=>i.subcategory===subcategory);
+ if (subcategoriy) {
+  const product=subcategoriy.products.find(i=>i.id===id);
+  if (product) {
+    res.status(200).json(product)
+  } else {
+    console.log("did not find the id");
+  }
+ } else {
+  console.log("did not find the subcategory");
+ }
+  }else{
+    console.log("did not find the category");
+    
+  }
+
+})
+app.listen(port,(err)=>{
+  if (err) {
+    console.log(err);
+    
+  } else {
+    console.log("Server is listening on port 4000");
+    
+  }
 })

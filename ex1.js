@@ -15,7 +15,7 @@
 6- Set the application to listen on port 3000 
 
 */
-const express=require('express')
+const express=require('express');
 const app=express();
 const users = [
   {
@@ -71,7 +71,7 @@ app.get('/users/:id',(req,res)=>{
  }
 
 });
-app.use('*',()=>{res.status(404).send('not found')})
+app.use((req,res)=>{res.status(404).send('not found')})
 app.listen('3000',(err)=>{
   if (err) {
     console.error("Error starting the server:", err);
