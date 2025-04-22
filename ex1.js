@@ -57,6 +57,9 @@ const users = [
 //Answer
 const express=require('express')
 const app=express();
+app.get('/',()=>{
+  
+})
 app.listen('3000',(err)=>{
 console.log(err);
 
