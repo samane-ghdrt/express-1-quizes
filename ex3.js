@@ -141,3 +141,33 @@ const products = [
 ];
 
 // answer
+const express=require('express');
+const app=express();
+app.get('/products',(req,res)=>{
+  let productsNew=[];
+  let prductNew1=[];
+  if(req.query.maxprice) {
+ productsNew=products.filter(prduct=>prduct.price<Number(req.query.maxprice))
+  }
+  if(req.query.limit){
+    if (productsNew.length!==0) {
+     prductNew1 =productsNew.slice(0,Number(req.query.limit))
+    } else {
+      prductNew1=products.slice(0,Number(req.query.limit))
+    }
+  }
+  if (prductNew1) {
+    res.status(200).json(prductNew1)
+  } else {
+    res.status(200).json(products)
+    
+  }
+})
+app.listen('4000',(err)=>{
+  if (err) {
+    console.error( err);
+  } else {
+    console.log('Server is running on port 4000'); 
+  }
+
+})
